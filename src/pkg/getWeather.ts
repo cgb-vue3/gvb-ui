@@ -139,3 +139,91 @@ const setWeatherIcon = (type: string): string => {
 	// 返回icon图名
 	return icon
 }
+
+// 根据天气类型返回对应的提示语
+export const GetWeatherMessage = (type: string): string => {
+	let message = ''
+	const messageWeatherMap: Record<string, string[]> = {
+		风: [
+			'有风',
+			'平静',
+			'微风',
+			'和风',
+			'清风',
+			'强风/劲风',
+			'疾风',
+			'大风',
+			'烈风',
+			'风暴',
+			'狂爆风',
+			'飓风',
+			'热带风暴',
+			'龙卷风'
+		],
+		多云: ['少云', '晴间多云', '多云'],
+		雪: ['雪', '阵雪', '小雪', '中雪', '大雪', '暴雪', '小雪-中雪', '中雪-大雪', '大雪-暴雪', '冷'],
+		雾: ['浮尘', '扬沙', '沙尘暴', '强沙尘暴', '雾', '浓雾', '强浓雾', '轻雾', '大雾', '特强浓雾'],
+		晴: ['晴', '热'],
+		雨夹雪: ['雨雪天气', '雨夹雪', '阵雨夹雪'],
+		雨: [
+			'阵雨',
+			'雷阵雨',
+			'雷阵雨并伴有冰雹',
+			'小雨',
+			'中雨',
+			'大雨',
+			'暴雨',
+			'大暴雨',
+			'特大暴雨',
+			'强阵雨',
+			'强雷阵雨',
+			'极端降雨',
+			'毛毛雨/细雨',
+			'雨',
+			'小雨-中雨',
+			'中雨-大雨',
+			'大雨-暴雨',
+			'暴雨-大暴雨',
+			'大暴雨-特大暴雨',
+			'冻雨'
+		],
+		阴: ['阴', '霾', '中度霾', '重度霾', '严重霾', '未知']
+	}
+
+	for (const key in messageWeatherMap) {
+		messageWeatherMap[key].forEach((item) => {
+			// 判断是否有相等的天气，如果有返回对应的提示语
+			if (item === type) {
+				// 判断key的类型返回对应的提示语
+				switch (key) {
+					case '风':
+						message = '清风徐来，愿你心情舒畅。'
+						break
+					case '多云':
+						message = '天空多云，心情也跟着明朗。'
+						break
+					case '雪':
+						message = '天空飘着雪花，愿你有个温暖的冬天。'
+						break
+					case '雾':
+						message = '雾气弥漫，注意视线安全。'
+						break
+					case '晴':
+						message = '晴空万里，是个好天气出门。'
+						break
+					case '雨夹雪':
+						message = '雨夹雪，小心路面湿滑。'
+						break
+					case '阴':
+						message = '天空阴沉沉的，心情也跟着有点阴郁。'
+						break
+					case '雨':
+						message = '雨天，记得带上雨伞出门。'
+						break
+				}
+			}
+		})
+	}
+	// 返回提示语
+	return message
+}

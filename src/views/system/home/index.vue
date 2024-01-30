@@ -9,7 +9,11 @@
 					<p class="text-2xl">
 						{{ Greeting_Fn() }}，{{ userStore.userInfo.nickname }}，{{ GetTransform_Fn() }}
 					</p>
-					<p class="">今日晴，0℃ - 10℃，天气寒冷，注意添加衣物。</p>
+					<p class="">
+						{{ GetWeek(weatherInfo.week) }},今日{{ weatherInfo.dayweather }}，{{
+							weatherInfo.daypower
+						}}℃，{{ GetWeatherMessage(weatherInfo.dayweather) }}
+					</p>
 					<div class="flex space-x-4">
 						<p>总用户数 ({{ totalObj.userTotal }}位)</p>
 						<p>总文章数 ({{ totalObj.articleTotal }}篇)</p>
@@ -76,19 +80,24 @@ import { UserStore } from '@/store/models/user'
 import { GetTransform_Fn, Greeting_Fn } from '@/pkg/greeting.ts'
 import request from '@/api/request.ts'
 import { onMounted, ref, watch } from 'vue'
-import { CalculateDaysDifference } from '@/pkg/time.ts'
+import { CalculateDaysDifference, GetWeek } from '@/pkg/time.ts'
 
 import router from '@/router'
+import { GaoDeWeather_Api, GetIp_Api } from '@/api/layout/home'
+import { GaoDe } from '@/config'
+import { GetWeatherMessage } from '@/pkg/getWeather.ts'
 const themeStore = ThemeTypeStore()
 const userStore = UserStore()
 let loading = ref(false)
 let totalObj = ref({})
+let weatherInfo = ref({})
 // 在组件中定义图表实例
 let myBar
 let myPie
 // 获取总数
 onMounted(() => {
 	getTotal()
+	getWeather()
 	myBar = echarts.init(document.getElementById('bar'), 'light')
 	myPie = echarts.init(document.getElementById('pie'), 'light')
 	updateBar() // 初始加载柱状图表
@@ -101,6 +110,31 @@ const getTotal = async () => {
 	try {
 		const res = await request.get('auth/v1/user_manage/getTotal')
 		totalObj.value = res.data
+		setTimeout(() => {
+			loading.value = false
+		}, 2000)
+	} catch (e) {
+		console.log(e)
+	}
+}
+
+// 获取总数
+const getWeather = async () => {
+	loading.value = true
+	try {
+		const IP = await GetIp_Api({ key: GaoDe.key })
+
+		try {
+			const weather = await GaoDeWeather_Api({
+				key: GaoDe.key,
+				extensions: GaoDe.extensions,
+				city: IP.data.city
+			})
+			weatherInfo.value = weather.data.forecasts[0].casts[0]
+			console.log(weather)
+		} catch (e) {
+			console.log(e)
+		}
 		setTimeout(() => {
 			loading.value = false
 		}, 2000)
