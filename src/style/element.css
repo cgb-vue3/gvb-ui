@@ -1,0 +1,45 @@
+.el-popconfirm__action {
+    .el-button:nth-child(2) {
+        border: none;
+        background: #FF9626;
+        color: #ffffff;
+    }
+    .el-button:nth-child(2):hover {
+        background: #FFB357;
+        color: #ffffff;
+    }
+}
+.el-popover{
+    z-index: 10002 !important;
+}
+.el-header {
+    padding: 0;
+}
+
+/*删除、警告*/
+.waringBtn {
+    @apply btn font-mono border-0 btn-sm  text-sm rounded-md text-dark_text bg-warning_1 hover:bg-warning_3;
+}
+/*添加、保存、搜索、关闭*/
+.primaryBtn {
+    @apply btn font-mono border-0 btn-sm  text-sm rounded-md text-dark_text bg-primary_1 hover:bg-primary_3;
+}
+/*取消*/
+.cancelBtn {
+    @apply btn font-mono btn-sm rounded-md border-[1px] text-broder_color_4;
+}
+
+/*主色文字*/
+.primaryText {
+    @apply text-primary_1 hover:text-primary_2;
+}
+
+/*警告文字*/
+.waringText {
+    @apply text-warning_1 hover:text-warning_2;
+}
+
+/*标题文字*/
+.tileText {
+    @apply font-mono text-light_text dark:text-dark_text;
+}

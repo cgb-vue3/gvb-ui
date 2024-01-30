@@ -1,0 +1,20 @@
+# .eslintignore 配置 eslint 忽略文件
+/node_modules
+/.vscode
+/.idea
+/.husky
+/package.json
+/package-lock.json
+/pnpm-lock.yaml
+*.md
+*.woff
+*.ttf
+
+.gitignore
+.eslintignore
+.eslintrc.cjs
+.stylelintignore
+.stylelintrc.cjs
+.commitlint.config.cjs
+.prettierignore
+.prettierrc.json
