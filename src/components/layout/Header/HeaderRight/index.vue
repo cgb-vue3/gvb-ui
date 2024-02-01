@@ -2,7 +2,7 @@
 	<!--      右侧功能区-->
 	<div class="w-[200px] h-[59px] flex justify-center items-center">
 		<!--    功能区-->
-		<div class="w-[120px] h-[59px] text-light_text flex justify-center items-center">
+		<div class="w-[80px] h-[59px] text-light_text flex justify-center items-center">
 			<template v-for="item in LeftArea" :key="item.name">
 				<div
 					@click="events(item.event)"
@@ -48,8 +48,8 @@ const layoutStore = LayoutStore()
 // 左侧功能区
 const LeftArea = ref([
 	{ name: 'shuaxin', event: 'refresh' },
-	{ name: 'github', event: 'goGithub' },
-	{ name: 'gitee', event: 'goGitee' }
+	{ name: 'github', event: 'goGithub' }
+	// { name: 'gitee', event: 'goGitee' }
 ])
 // 下拉数据
 const dropdownList = ref([
@@ -82,9 +82,3 @@ const fullScreen = () => {
 	screenfull.toggle()
 }
 </script>
-
-<!--<style>-->
-<!--.myTheme_textAndBgHover {-->
-<!--	@layer text-light_text hover:bg-light_hover dark:text-dark_text dark:hover:bg-dark_hover;-->
-<!--}-->
-<!--</style>-->

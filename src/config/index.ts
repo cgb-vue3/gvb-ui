@@ -3,7 +3,7 @@ export const Required = true
 
 // 侧栏组件
 export const Sidebar_Conf = {
-	Title: 'QTHAdmin'
+	Title: '秋田弘博客系统'
 }
 
 // 忘记密码

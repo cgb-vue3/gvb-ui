@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Get_Cookie } from '@/pkg/token.ts'
-import { UpErrorMessage_Fn, UpSuccessMessage_Fn, UpWarningMessage_Fn } from '@/pkg/message.ts'
+import { UpErrorMessage_Fn, UpSuccessMessage_Fn } from '@/pkg/message.ts'
 /** 环境变量 */
 const ENV = import.meta.env
 /** 创建axios实例 */
@@ -18,7 +18,6 @@ request.interceptors.request.use(
 			config.headers = config.headers || {}
 			config.headers['Authorization'] = token
 		}
-
 		// 配置密钥
 		/* ------------*/
 		return config
@@ -50,17 +49,17 @@ request.interceptors.response.use(
 			} else if (code == 1042) {
 				return resp.data
 			} else if (code == 1041) {
-				// 上传图片
-				// 图片列表
-				const imgList = resp.data.data.add_file_list
-				imgList.forEach((i) => {
-					// 判断上传的图片是否存在
-					if (i.is_success) {
-						UpSuccessMessage_Fn(i.file_name + i.message, 3000)
-					} else {
-						UpWarningMessage_Fn(i.file_name + i.message, 3000)
-					}
-				})
+				// // 上传图片
+				// // 图片列表
+				// const imgList = resp.data.data.add_file_list
+				// imgList.forEach((i) => {
+				// 	// 判断上传的图片是否存在
+				// 	if (i.is_success) {
+				// 		UpSuccessMessage_Fn(i.message, 3000)
+				// 	} else {
+				// 		UpWarningMessage_Fn(i.message, 3000)
+				// 	}
+				// })
 				return resp.data
 			} else if (code == 1043) {
 				return resp.data
@@ -70,6 +69,10 @@ request.interceptors.response.use(
 			} else if (code == 1061) {
 				return resp.data
 			} else if (code == 1069) {
+				return resp.data
+			} else if (code == 1050) {
+				return resp.data
+			} else if (code == 1051) {
 				return resp.data
 			}
 			UpSuccessMessage_Fn(message, 2000)

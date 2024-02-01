@@ -20,8 +20,14 @@ const p = defineProps({
 	image: {},
 	drawerVisible: {}
 })
+const e = defineEmits(['TransferImagesPath'])
+
+const TransferImagesPath = (path) => {
+	e('TransferImagesPath', path)
+}
 
 const setAvatar = (item) => {
+	TransferImagesPath(item.path)
 	p.image.avatarPath = item.path
 	p.drawerVisible.visible = false
 }

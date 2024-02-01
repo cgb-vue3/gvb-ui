@@ -3,12 +3,12 @@
 		class="myMenu_text border-light_border_text dark:border-dark_border_text myMenu_bg border-r-[1px] h-screen overflow-hidden">
 		<router-link to="/home">
 			<div class="h-[60px] py-2 flex justify-start items-center">
-				<div class="w-[40px] mx-[10px] h-[60px] flex justify-center items-center">
-					<svg-icon name="log" size="50px"></svg-icon>
+				<div class="w-[40px] mx-[5px] h-[60px] flex justify-center items-center">
+					<svg-icon name="log" size="40px"></svg-icon>
 				</div>
 				<span
 					v-show="!layoutStore.isShowMenu"
-					class="w-[120px] h-[60px] flex justify-center items-center font-mono tracking-wide antialiased text-2xl">
+					class="w-[200px] h-[60px] flex justify-center items-center text-xl">
 					{{ Sidebar_Conf.Title }}
 				</span>
 			</div>

@@ -192,15 +192,23 @@ const userPie = () => {
 			text: '用户数据'
 		},
 		tooltip: {
-			trigger: 'item',
-			formatter: '{a} <br/>{b}: {c} ({d}%)'
+			trigger: 'item'
+		},
+		legend: {
+			top: '5%',
+			left: 'center'
 		},
 		series: [
 			{
-				name: '用户性别分布',
+				name: '用户级别占比',
 				type: 'pie',
-				radius: '50%',
+				radius: ['40%', '70%'],
 				avoidLabelOverlap: false,
+				itemStyle: {
+					borderRadius: 10,
+					borderColor: '#fff',
+					borderWidth: 2
+				},
 				label: {
 					show: false,
 					position: 'center'
@@ -208,7 +216,7 @@ const userPie = () => {
 				emphasis: {
 					label: {
 						show: true,
-						fontSize: '20',
+						fontSize: 20,
 						fontWeight: 'bold'
 					}
 				},
@@ -216,8 +224,9 @@ const userPie = () => {
 					show: false
 				},
 				data: [
-					{ value: 335, name: '男' },
-					{ value: 310, name: '女' }
+					{ value: 3, name: '超级管理员' },
+					{ value: 20, name: '管理员' },
+					{ value: 30, name: '普通用户' }
 				]
 			}
 		]

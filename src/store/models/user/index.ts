@@ -84,7 +84,10 @@ export const UserStore = defineStore(
 		// 获取当前用户信息
 		const GetUserInfo_Fn = async () => {
 			try {
-				return await GetUserInfo_Api()
+				const r = await GetUserInfo_Api()
+				console.log(r.data.userInfo)
+				userInfo.value = r.data.userInfo
+				return r
 			} catch (e) {
 				return e
 			}

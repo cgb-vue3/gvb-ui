@@ -1,6 +1,6 @@
 <template>
 	<div
-		v-loading="!userListStore.list"
+		v-loading="!userListStore.list || loading"
 		v-if="userListStore.list"
 		class="mainContainer flex flex-col justify-start items-center">
 		<Gvb_covert_Top
@@ -39,7 +39,10 @@
 				v-if="visibleStore.DrawerLabel == 'User'"
 				:visible="visibleStore.isDrawerVisible"
 				:drawer-option="drawerOption">
-				<Gvb_upload @upload="upload" :upload-option="uploadStore.uploadOption.avatar" />
+				<Gvb_upload
+					class="flex flex-col items-center"
+					@upload="upload"
+					:upload-option="uploadStore.uploadOption.avatar" />
 				<Gvb_imgList
 					v-if="imageFlag"
 					v-loading="!imageListStore.list"
@@ -60,13 +63,13 @@ import { UserListStore } from '@/store/models/layout/userManage/userList'
 import { UserManageStore } from '@/store/models/layout/userManage'
 import { ImageListStore } from '@/store/models/imageList'
 import { UploadStore } from '@/store/models/upload'
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { VisibleStore } from '@/store/models/visible'
 import {
 	addUserRules,
 	editUserRules
 } from '@/components/layout/main/userManage/validation/userManageValida.ts'
-import { UpErrorMessage_Fn } from '@/pkg/message.ts'
+import { UpErrorMessage_Fn, UpSuccessMessage_Fn } from '@/pkg/message.ts'
 import { ReceptionFormData_Fn } from '@/components/layout/main/userManage/validation/userManageValida.ts'
 import { FormatUserParams_Fn } from '@/pkg/formatParmas.vue.ts'
 import { UserStore } from '@/store/models/user'
@@ -77,6 +80,13 @@ const userListStore = UserListStore()
 const userManageStore = UserManageStore()
 const visibleStore = VisibleStore()
 const uploadStore = UploadStore()
+const loading = ref(false)
+onMounted(() => {
+	loading.value = true
+	setTimeout(() => {
+		loading.value = false
+	}, 2000)
+})
 
 // 添加用户的ref
 const fromRef = ref(null)
@@ -108,9 +118,12 @@ const openDrawer = () => {
 const upload = async (file) => {
 	try {
 		const r = await uploadStore.UploadImages_Fn(file.file, 'avatar')
-		if (r.code == 1041) {
-			await imageListStore.GetImagePagList_Fn()
+		if (r.data.add_file_list[0].is_success) {
+			UpSuccessMessage_Fn('头像上传成功！')
+		} else {
+			UpErrorMessage_Fn('图片已存在，不可重复上传！')
 		}
+		await imageListStore.GetImagePagList_Fn()
 	} catch (e) {
 		return e
 	}

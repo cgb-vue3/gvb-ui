@@ -10,7 +10,7 @@
 			{{ uploadOption.title }}
 		</button>
 		<template #tip>
-			<div class="el-upload__tip">上传图片大小最大为5MB</div>
+			<div class="el-upload__tip text-light_text dark:text-dark_text">上传图片大小最大为5MB</div>
 		</template>
 	</el-upload>
 </template>

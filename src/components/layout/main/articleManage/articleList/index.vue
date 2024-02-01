@@ -1,5 +1,5 @@
 <template>
-	<div class="mainContainer">
+	<div v-loading="loading" class="mainContainer">
 		<!--    抽屉-->
 		<Gvb_drawer
 			v-if="drawerOption && visibleStore.DrawerLabel == 'addArticle'"
@@ -45,7 +45,7 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import Gvb_drawer from '@/components/Gvb_comps/Gvb_drawer.vue'
 import Gvb_dialog from '@/components/Gvb_comps/Gvb_dialog.vue'
 import Gvb_from from '@/components/Gvb_comps/Gvb_from.vue'
@@ -64,7 +64,7 @@ import { AddArticleStore } from '@/store/models/layout/articleManage/addArticle/
 import { VisibleStore } from '@/store/models/visible'
 import { FormatUserParams_Fn } from '@/pkg/formatParmas.vue.ts'
 import { UserStore } from '@/store/models/user'
-import { UpSuccessMessage_Fn, UpWarningMessage_Fn } from '@/pkg/message.ts'
+import { UpErrorMessage_Fn, UpSuccessMessage_Fn, UpWarningMessage_Fn } from '@/pkg/message.ts'
 import { ArticleListStore } from '@/store/models/layout/articleManage/articleList'
 import { UploadStore } from '@/store/models/upload'
 import { ImageListStore } from '@/store/models/imageList'
@@ -79,6 +79,13 @@ const nestDrawerOption = ref()
 const fromRef = ref(null)
 const selectRef = ref(null)
 const flag = ref(true)
+const loading = ref(false)
+onMounted(() => {
+	loading.value = true
+	setTimeout(() => {
+		loading.value = false
+	}, 2000)
+})
 // 打开嵌套抽屉
 const openDrawer = () => {
 	visibleStore.NestDrawerLabel = 'articleBanner'
@@ -104,9 +111,12 @@ const remover = async () => {
 const upload = async (file) => {
 	try {
 		const r = await uploadStore.UploadImages_Fn(file.file)
-		if (r.code == 1041) {
-			await imageListStore.GetImagePagList_Fn()
+		if (r.data.add_file_list[0].is_success) {
+			UpSuccessMessage_Fn('封面上传成功！')
+		} else {
+			UpErrorMessage_Fn('图片已存在，不可重复上传！')
 		}
+		await imageListStore.GetImagePagList_Fn()
 	} catch (e) {
 		return e
 	}

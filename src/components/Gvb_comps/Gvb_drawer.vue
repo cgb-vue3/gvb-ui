@@ -42,7 +42,10 @@
 	<!--	    嵌套抽屉-->
 	<div v-if="nestDrawerOption">
 		<Gvb_drawer :visible="isNestDrawerVisible" :drawer-option="nestDrawerOption">
-			<Gvb_upload @upload="upload" :upload-option="uploadStore" />
+			<Gvb_upload
+				class="flex flex-col items-center"
+				@upload="upload"
+				:upload-option="uploadStore" />
 			<Gvb_imgList
 				v-loading="!imageList.list"
 				:image-list="imageList.list"
@@ -84,6 +87,7 @@ const finish = () => {
 	})
 }
 const upload = (file) => {
+	console.log(file)
 	e('upload', file)
 }
 
