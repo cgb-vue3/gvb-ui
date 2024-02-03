@@ -10,7 +10,7 @@
 		</div>
 		<ul
 			tabindex="0"
-			class="dropdown-content myHeader_dropDown w-[120px] z-[100] menu p-2 shadow rounded-box">
+			class="dropdown-content myHeader_dropDown w-[120px] z-[1] menu p-2 shadow rounded-box">
 			<template v-for="item in list" :key="item.title">
 				<li @click="quit(item.event)" class="myHeader_dropDown_item">
 					<a class="hover:text-primary">{{ item.title }}</a>
@@ -22,36 +22,23 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { UpSuccessMessage_Fn } from '@/pkg/message.ts'
 import { UserStore } from '@/store/models/user/index.ts'
 import { LayoutStore } from '@/store/models/layout/index.ts'
+import { UpSuccessMessage_Fn } from '@/pkg/message.ts'
 const router = useRouter()
 const layoutStore = LayoutStore()
 const userStore = UserStore()
 defineProps(['list'])
 
 const quit = (e) => {
-	if (e == 'myCenter') {
-		// 去个人中心
-		router.push('/myCenter')
-	} else if (e == 'portal') {
-		// 进图前台
-		router.push('/portal')
-	} else if (e == 'quit') {
+	if (e == 'quit') {
 		// 登出
 		// 退出登录清除token和本地缓存
 		userStore.Quit_Fn()
-		router.push('/login')
 		layoutStore.isShowMenu = false
 		layoutStore.visitedViews = []
 		UpSuccessMessage_Fn('退出成功', 1500)
-	} else if (e == 'login') {
-		// 去登录
-		router.push('/login')
-	} else if (e == 'register') {
-		// 去注册
-		router.push('/register')
-	} else if (e == 'background') {
+	} else if (e == 'backstage') {
 		// 去后台
 		router.push('/home')
 	}

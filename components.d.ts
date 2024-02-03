@@ -55,6 +55,7 @@ declare module 'vue' {
     Gvb_table: typeof import('./src/components/Gvb_comps/Gvb_table.vue')['default']
     Gvb_theme: typeof import('./src/components/Gvb_comps/Gvb_theme.vue')['default']
     Gvb_upload: typeof import('./src/components/Gvb_comps/Gvb_upload.vue')['default']
+    Head: (typeof import('./src/views/web/portal/comps/head.vue'))['default']
     Header: typeof import('./src/components/layout/Header/index.vue')['default']
     HeaderLeft: typeof import('./src/components/layout/Header/HeaderLeft/index.vue')['default']
     HeaderRight: typeof import('./src/components/layout/Header/HeaderRight/index.vue')['default']

@@ -15,10 +15,9 @@ export const PortalStore = defineStore('PORTAL', () => {
 		},
 		//菜单配置
 		menuOption: [
-			{ name: '首页', label: 'portal', path: '/portal' },
-			// { name: '我的文章', label: 'myArticle', path: '/myArticle' }
-			// { name: '分类', label: 'class', path: '/class' },
-			{ name: '关于', label: 'about', path: '/about' }
+			{ name: '首页', icon: 'portal', path: '/portal' },
+			{ name: '发现', icon: 'found', path: '#', children: [{}] },
+			{ name: '关于', icon: 'about', path: '/about' }
 		]
 	})
 	return { PortalOption }

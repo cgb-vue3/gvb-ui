@@ -11,7 +11,7 @@
 				<div class="w-[450px] h-[600px] Page_right md:w-[600px]">
 					<!--     头部 -->
 					<div class="w-[450px] h-[100px] Page_title md:w-[600px]">
-						<span>Welcome to login</span>
+						<span>欢迎登录</span>
 					</div>
 					<!--   登录信息     -->
 					<div class="w-[450px] h-[500px] Page_main md:w-[600px]">
@@ -92,7 +92,7 @@ const router = useRouter()
 const state = reactive({
 	loginRuleForm: {
 		username: 'superAdmin',
-		password: '123456'
+		password: '1233456'
 	}
 })
 // 解构数据

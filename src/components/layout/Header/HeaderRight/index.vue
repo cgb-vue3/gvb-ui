@@ -6,14 +6,14 @@
 			<template v-for="item in LeftArea" :key="item.name">
 				<div
 					@click="events(item.event)"
-					class="myHeader_text myHeader_hover w-[40px] h-[59px] flex justify-center items-center">
+					class="myHeader_text myHeader_hover w-[40px] h-[40px] rounded-xl flex justify-center items-center">
 					<svg-icon :name="item.name"></svg-icon>
 				</div>
 			</template>
 		</div>
 		<!--    全屏-->
 		<div
-			class="myHeader_text myHeader_hover w-[40px] h-[59px] flex justify-center items-center"
+			class="myHeader_text myHeader_hover w-[40px] h-[40px] rounded-xl flex justify-center items-center"
 			@click="fullScreen">
 			<svg-icon v-if="layoutStore.isFullScreen" name="fangda"></svg-icon>
 			<svg-icon v-else name="suoxiao"></svg-icon>
@@ -49,7 +49,6 @@ const layoutStore = LayoutStore()
 const LeftArea = ref([
 	{ name: 'shuaxin', event: 'refresh' },
 	{ name: 'github', event: 'goGithub' }
-	// { name: 'gitee', event: 'goGitee' }
 ])
 // 下拉数据
 const dropdownList = ref([

@@ -12,7 +12,7 @@
 				<div class="w-[450px] h-[750px] Page_right md:w-[600px]">
 					<!--  标题     -->
 					<div class="w-[450px] h-[100px] Page_title md:w-[600px]">
-						<span>Welcome to register</span>
+						<span>欢迎注册</span>
 					</div>
 					<div class="w-[450px] h-[650px] Page_main md:w-[600px]">
 						<!--      注册表单-->
