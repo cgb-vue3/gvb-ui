@@ -1,6 +1,6 @@
 <template>
-	<nav class="relative myHeader_bg myHeader_text shadow">
-		<div class="container px-3 lg:px-6 lg:py-4 mx-auto">
+	<nav class="relative myHeader_bg myHeader_text transition duration-300 shadow">
+		<div class="container px-3 lg:py-4 lg:px-0 mx-auto">
 			<div class="lg:flex lg:items-center lg:justify-between">
 				<div class="flex items-center justify-between">
 					<!--   log-start       -->
@@ -62,7 +62,7 @@
 				<!-- Mobile Menu open: "block", Menu closed: "hidden" -->
 				<div
 					:class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-					class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
+					class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out myHeader_bg lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
 					<div class="relative mt-4 md:mt-0">
 						<span class="absolute inset-y-0 left-0 flex items-center pl-3">
 							<svg class="w-5 h-5 text-light_text_secondary" viewBox="0 0 24 24" fill="none">
